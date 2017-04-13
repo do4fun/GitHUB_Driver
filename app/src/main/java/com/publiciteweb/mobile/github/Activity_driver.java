@@ -77,6 +77,7 @@ public class Activity_driver extends AppCompatActivity implements View.OnClickLi
         btnTravail.setBackgroundColor(savedInstanceState.getInt(STATE_TRAVAIL));*/
         switch (NAME_BUTTON){
             case R.id.btnRepos:
+                
                 btnRepos.setBackground(getDrawable(R.drawable.button_press));
                 break;
             case R.id.btnCouchette:
