@@ -63,14 +63,5 @@
             android:text="Connexion"
             android:textSize="20dp"
             android:textColor="#FFFFFF"/>
-
-        <TextView android:id="@+id/link_signup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:text="No account yet? Create one"
-            android:gravity="center"
-            android:textSize="16dip"/>
-
     </LinearLayout>
 </RelativeLayout>

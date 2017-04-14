@@ -9,9 +9,7 @@ import android.webkit.WebView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by sun on 17-04-11.
@@ -21,25 +19,32 @@ public class ScreenSlidePageFragment extends Fragment {
     private WebView viewFicheJournaliere;
     private TextView txtDate;
     private ViewGroup rootView;
-    private String urlFicheJournaliere = "http://10.0.2.2:80/ProjetFinal/fichejournaliere.html";
-    private static int differenceDayInDate;
+    private String urlFicheJournaliere = "http://do4fun.byethost18.com/GitHub/fichejournaliere.html";
 
     public static ScreenSlidePageFragment newInstance(int differenceInDate){
         ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
-        differenceDayInDate = differenceInDate;
+        //sauvegarde le nombre des jours precedents de jour courant
+        Bundle args = new Bundle();
+        args.putInt("differenceInDate", (-1)*differenceInDate);
+        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         rootView = (ViewGroup) inflater.inflate(
                 R.layout.view_rapport, container, false);
-
+        //affichage la date
         txtDate = (TextView) rootView.findViewById(R.id.txtDateFiche);
-        String currentDateTimeString = DateFormat.getDateInstance().format(new Date());
+        Calendar dateCurrent = Calendar.getInstance();
+        dateCurrent.add(Calendar.DATE,getArguments().getInt("differenceInDate"));
+        String currentDateTimeString =
+                DateFormat.getDateInstance().format(dateCurrent.getTime());
         txtDate.setText(currentDateTimeString);
 
+        //affichage Fiche Journaliere
         viewFicheJournaliere = (WebView)rootView.findViewById(R.id.viewFicheJournaliere);
         viewFicheJournaliere.getSettings().setJavaScriptEnabled(true);
         viewFicheJournaliere.getSettings().setBuiltInZoomControls(true);
@@ -47,5 +52,4 @@ public class ScreenSlidePageFragment extends Fragment {
         viewFicheJournaliere.loadUrl(urlFicheJournaliere);
         return rootView;
     }
-
 }

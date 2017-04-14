@@ -1,7 +1,6 @@
 package com.publiciteweb.mobile.github;
 
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,10 +22,6 @@ public class Activity_driver extends AppCompatActivity implements View.OnClickLi
     private Button btnFicheJournaliere;
     private final int buttonColorBlue = rgb(0,102,153);
     private static final String STATE_BUTTON = "buttonPressed";
-    private static final String STATE_REPOS = "buttonRepos";
-    private static final String STATE_COUCHETTE = "buttonCouchette";
-    private static final String STATE_CONDUIT = "buttonConduit";
-    private static final String STATE_TRAVAIL = "buttonTravail";
     private static int NAME_BUTTON = 0;
 
     @Override
@@ -35,11 +30,8 @@ public class Activity_driver extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_driver);
         readContenApp();
         if (savedInstanceState != null) {
-            // Restore value of members from saved state
-            /*btnRepos.setBackgroundColor(savedInstanceState.getInt(STATE_REPOS));
-            btnCouchette.setBackgroundColor(savedInstanceState.getInt(STATE_COUCHETTE));
-            btnConduite.setBackgroundColor(savedInstanceState.getInt(STATE_CONDUIT));
-            btnTravail.setBackgroundColor(savedInstanceState.getInt(STATE_TRAVAIL));*/
+            //pour re-initialiser l'etat de boutons (presse ou normal)
+            // en changement screen orientation ou après la pause
             switch (NAME_BUTTON){
                 case R.id.btnRepos:
                     btnRepos.setBackground(getDrawable(R.drawable.button_press));
@@ -59,25 +51,18 @@ public class Activity_driver extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    //pour sauvegarder l'etat de boutons (presse ou normal)
+    //pour re-initialiser après le changement screen orientation ou la pause
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putInt(STATE_BUTTON, NAME_BUTTON);
-        /*savedInstanceState.putInt(STATE_REPOS, ((ColorDrawable)btnRepos.getBackground()).getColor());
-        savedInstanceState.putInt(STATE_COUCHETTE, ((ColorDrawable)btnCouchette.getBackground()).getColor());
-        savedInstanceState.putInt(STATE_CONDUIT, ((ColorDrawable)btnConduite.getBackground()).getColor());
-        savedInstanceState.putInt(STATE_TRAVAIL, ((ColorDrawable)btnTravail.getBackground()).getColor());*/
         super.onSaveInstanceState(savedInstanceState);
     }
 
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-       /* btnRepos.setBackgroundColor(savedInstanceState.getInt(STATE_REPOS));
-        btnCouchette.setBackgroundColor(savedInstanceState.getInt(STATE_COUCHETTE));
-        btnConduite.setBackgroundColor(savedInstanceState.getInt(STATE_CONDUIT));
-        btnTravail.setBackgroundColor(savedInstanceState.getInt(STATE_TRAVAIL));*/
         switch (NAME_BUTTON){
             case R.id.btnRepos:
-                
                 btnRepos.setBackground(getDrawable(R.drawable.button_press));
                 break;
             case R.id.btnCouchette:
@@ -93,20 +78,6 @@ public class Activity_driver extends AppCompatActivity implements View.OnClickLi
                 break;
         }
     }
-    /*@Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            setContentView(R.layout.activity_driver);
-            linearLayoutHaut.setOrientation(LinearLayout.VERTICAL);
-            linearLayoutFoot.setOrientation(LinearLayout.VERTICAL);
-        } else if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
-            linearLayoutHaut.setOrientation(LinearLayout.HORIZONTAL);
-            linearLayoutFoot.setOrientation(LinearLayout.HORIZONTAL);
-        }
-    }*/
 
     protected void readContenApp(){
         toolbarGestion = (Toolbar)findViewById(R.id.toolbarGestion);
@@ -158,6 +129,7 @@ public class Activity_driver extends AppCompatActivity implements View.OnClickLi
                 btnConduite.setBackgroundColor(buttonColorBlue);
                 break;
             case R.id.btnFicheJournaliere:
+                //ouvrir la fenetre avec Fiche Journalière
                 Intent intentFicheJournaliere = new Intent(Activity_driver.this, Activity_ficheJournaliere.class);
                 startActivity(intentFicheJournaliere);
                 break;
