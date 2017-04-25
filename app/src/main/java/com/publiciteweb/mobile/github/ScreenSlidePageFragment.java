@@ -19,7 +19,6 @@ public class ScreenSlidePageFragment extends Fragment {
     private WebView viewFicheJournaliere;
     private TextView txtDate;
     private ViewGroup rootView;
-    private String urlFicheJournaliere = "http://do4fun.byethost18.com/GitHub/fichejournaliere.html";
 
     public static ScreenSlidePageFragment newInstance(int differenceInDate){
         ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
@@ -49,7 +48,7 @@ public class ScreenSlidePageFragment extends Fragment {
         viewFicheJournaliere.getSettings().setJavaScriptEnabled(true);
         viewFicheJournaliere.getSettings().setBuiltInZoomControls(true);
         viewFicheJournaliere.getSettings().setSupportZoom(true);
-        viewFicheJournaliere.loadUrl(urlFicheJournaliere);
+        viewFicheJournaliere.loadUrl(Driver.URL_DISPATCH+"fichejournaliere.html");
         return rootView;
     }
 }

@@ -29,7 +29,7 @@ public class Activity_ficheJournaliere extends AppCompatActivity implements View
 
     protected void readContenApp(){
         toolbarGestion = (Toolbar)findViewById(R.id.toolbarGestion);
-        toolbarGestion.setNavigationIcon(R.drawable.logo_old);
+        toolbarGestion.setNavigationIcon(R.drawable.logo2);
         setSupportActionBar(toolbarGestion);
         getSupportActionBar().setTitle("GitHub Driver");
 
